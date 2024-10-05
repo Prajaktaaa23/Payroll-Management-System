@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Welcome to the Payroll Management System</h1>
+    <p>This system helps you manage your company's payroll efficiently.</p>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="feature-box">
+                <span class="icon">&#128209;</span>
+                <h2>Easy to Use</h2>
+                <p>The system is user-friendly and intuitive, making it easy for anyone to use.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-box">
+                <span class="icon">&#128176;</span>
+                <h2>Secure</h2>
+                <p>Your data is protected with advanced security measures to ensure confidentiality.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-box">
+                <span class="icon">&#128176;</span>
+                <h2>Efficient</h2>
+                <p>Automate payroll processes<BR> to save your time <BR>and reduce errors.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <h2>Ready to Get Started?</h2>
+        <a href="{% url 'login' %}" class="btn-custom">Login</a>
+        <a href="{% url 'register_employee' %}" class="btn-custom">Sign Up as Employee</a>
+        <a href="{% url 'register_hr' %}" class="btn-custom">Sign Up as HR</a>
+    </div>
+</div>
+{% endblock %}

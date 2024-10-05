@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}HR Leave Management - Payroll Management System{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card mx-auto mt-5" style="max-width: 800px;">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4">HR Leave Management</h2>
+            <div class="row">
+                {% for leave_request in leave_requests %}
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Employee: {{ leave_request.employee.username }}</h5>
+                            <p class="card-text">Start Date: {{ leave_request.start_date|date:"M d, Y" }}</p>
+                            <p class="card-text">End Date: {{ leave_request.end_date|date:"M d, Y" }}</p>
+                            <p class="card-text">Leave Type: {{ leave_request.leave_type }}</p>
+                            <p class="card-text">Description: {{ leave_request.description }}</p>
+                            {% if leave_request.is_approved is None %}
+                            <p>Status: Pending</p>
+                            <form method="post" action="{% url 'hr_leave_management' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="leave_id" value="{{ leave_request.id }}">
+                                <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
+                                <button type="submit" name="action" value="deny" class="btn btn-danger">Deny</button>
+                            </form>
+                            {% elif leave_request.is_approved %}
+                            <p>Status: Approved</p>
+                            {% else %}
+                            <p>Status: Denied</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
